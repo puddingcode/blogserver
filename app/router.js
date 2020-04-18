@@ -36,4 +36,7 @@ module.exports = app => {
   router.get('/article/getArticleDislikes/:id',jwt,controller.article.getDislikesNumber);
   router.delete('/article/:id',jwt,controller.article.deleteArticle);
   router.get('/article/editArticle/:id',jwt,controller.article.editArticle);
+
+  router.get('/comments/getComments',controller.comments.getComments);
+  router.post('/comments/addComment',jwt,controller.comments.addComment);
 }; 

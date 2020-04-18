@@ -37,6 +37,8 @@ class ArticleController extends BaseController {
     async getArticleById() {
         const { ctx } = this;
         const ret = await ctx.model.Article.findById(ctx.params.id).populate('author');
+        ret.views+=1;
+        ret.save();
         if (ret._id) {
             this.success(ret);
         }

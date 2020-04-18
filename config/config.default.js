@@ -31,13 +31,17 @@ module.exports = appInfo => {
         enable: false
       }
     },
-    mongoose:{
-      client:{
-        url:'mongodb://127.0.0.1:27017/blog',
-        options:{}
+    mongoose: {
+      client: {
+        url: 'mongodb://120.76.56.34:27017',
+        options: {
+          user: 'xxx',
+          pass: 'xxxx',
+          dbName: 'xxx'
+        }
       }
     },
-    jwt:{
+    jwt: {
       secret: 'alisoncode'
     }
   };

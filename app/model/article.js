@@ -21,7 +21,8 @@ module.exports = app => {
             type:[{type: Schema.Types.ObjectId, ref: 'User'}]
         },
         typeImg: { type: String, default: '/js.png' },
-        typeTitle: { type: String }
+        typeTitle: { type: String },
+        images:{type:[]}
     })
     return mongoose.model('Article', ArticleSchema);
 }

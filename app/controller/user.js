@@ -51,7 +51,7 @@ class UserController extends BaseController {
             }, app.config.jwt.secret, {
                 expiresIn: '1h'
             })
-            this.success({ token, nickName })
+            this.success({ token, nickName})
         } else {
             this.error('用户名密码错误')
         }
