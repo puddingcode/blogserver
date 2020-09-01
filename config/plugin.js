@@ -9,10 +9,10 @@
 // };
 exports.mongoose = {
   enable: true,
-  package: 'egg-mongoose'
-}
+  package: 'egg-mongoose',
+};
 
 exports.jwt = {
   enable: true,
-  package:'egg-jwt'
-}
+  package: 'egg-jwt',
+};

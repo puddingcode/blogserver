@@ -28,21 +28,21 @@ module.exports = appInfo => {
     ...userConfig,
     security: {
       csrf: {
-        enable: false
-      }
+        enable: false,
+      },
     },
     mongoose: {
       client: {
         url: 'mongodb://120.76.56.34:27017',
         options: {
-          user: 'xxx',
-          pass: 'xxxx',
-          dbName: 'xxx'
-        }
-      }
+          user: 'root',
+          pass: '123456',
+          dbName: 'blog',
+        },
+      },
     },
     jwt: {
-      secret: 'alisoncode'
-    }
+      secret: 'alisoncode',
+    },
   };
 };
