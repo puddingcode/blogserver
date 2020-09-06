@@ -16,6 +16,7 @@ module.exports = app => {
   router.post('/user/checkNickNameStatus', controller.user.checkNickNameStatus);
   router.post('/user/register', controller.user.create);
   router.post('/user/login', controller.user.login);
+  router.post('/user/adminLogin', controller.user.adminLogin);
   router.post('/user/managelogin', controller.user.managelogin);
   router.post('/user/checkEmail', controller.user.checkEmailRepeat);
   router.post('/user/checkNickName', controller.user.checkNickNameRepeat);
@@ -27,7 +28,10 @@ module.exports = app => {
 
   router.get('/user/:id/followers', jwt, controller.user.followers);
   router.get('/user/:id/following', jwt, controller.user.following);
+  router.post('/user/addAdmin', jwt, controller.user.addAdmin);
+  router.post('/user/deleteAdmin', jwt, controller.user.deleteAdmin);
   router.get('/user/userlist', controller.user.userlist);
+  router.get('/user/adminUser', jwt, controller.user.adminUser);
 
   router.get('/article', controller.article.list);
   router.post('/article/create', jwt, controller.article.create);

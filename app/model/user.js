@@ -11,6 +11,8 @@ module.exports = app => {
     following: {
       type: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     },
+    authority: { type: Boolean, default: false },
+    idInformation: { type: String },
   });
   return mongoose.model('User', UserSchema);
 };

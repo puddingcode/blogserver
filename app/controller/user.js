@@ -72,6 +72,25 @@ class UserController extends BaseController {
       this.error('密码错误');
     }
   }
+  async adminLogin() {
+    const { ctx, app } = this;
+    const { nickName, password } = ctx.request.body;
+    const user = await ctx.model.User.findOne({
+      nickName,
+      password: md5(password + ps),
+    });
+    if (user && user.authority) {
+      const token = app.jwt.sign({
+        nickName,
+        _id: user._id,
+      }, app.config.jwt.secret, {
+        expiresIn: '1h',
+      });
+      this.success({ token, nickName });
+    } else {
+      this.error('无法登录,请重新核验');
+    }
+  }
   async checkNickNameStatus() {
     const { ctx } = this;
     const { nickName } = ctx.request.body;
@@ -166,6 +185,45 @@ class UserController extends BaseController {
     const { ctx } = this;
     const list = await ctx.model.User.find();
     this.success(list);
+  }
+  // 添加后台权限
+  async addAdmin() {
+    const { ctx } = this;
+    const { nickName, password, idInformation } = ctx.request.body;
+    const user = await ctx.model.User.findOne({
+      nickName,
+      password: md5(password + ps),
+    });
+    if (user) {
+      user.authority = true;
+      user.idInformation = idInformation;
+      user.save();
+      const data = {
+        name: nickName,
+        idInformation,
+      };
+      this.success(data);
+    } else {
+      this.error('用户不存在');
+    }
+  }
+  // 返回admin用户
+  async adminUser() {
+    const { ctx } = this;
+    const admins = await ctx.model.User.find({ authority: true });
+    this.success(admins);
+  }
+  // 删除admin用户
+  async deleteAdmin() {
+    const { ctx } = this;
+    const { nickName } = ctx.request.body;
+    const user = await ctx.model.User.findOne({ nickName });
+    if (user) {
+      user.authority = false;
+      user.save();
+      this.success(nickName);
+    }
+
   }
 }
 
